@@ -15,3 +15,19 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+import os
+
+
+def get_mantra_root():
+    root = os.getcwd()
+    settings_file = "settings.py"
+
+    while True:
+        if os.path.exists(os.path.join(root, settings_file)):
+            return root
+        else:
+            parent_dir = os.path.split(root)[0]
+            if parent_dir == root:
+                break
+            root = parent_dir
+    return None
